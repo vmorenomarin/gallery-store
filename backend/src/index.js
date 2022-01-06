@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+require("./database");
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(express.json()); // Parse incoming requests with JSON payloads
 app.use(morgan("dev")); // HTTP request logger
 app.use(cors({ origin: "*" })); // Cross-Origin Resource Sharing. Enable share resources between two domains/servers.
 
-// app.use("/products", require("./routes/product.route"));
+app.use("/product", require("./routes/product.route"));
 
 // Run server
 app.listen(app.get("port"), () => {
