@@ -6,5 +6,6 @@ upload = require("../middlewares/imgUpload");
 route.get("/", productCtrl.listProducts);
 route.get("/product/", productCtrl.listProductById);
 route.post("/", upload.single("img"), productCtrl.addProduct);
+route.put("/:id", upload.single("img"), productCtrl.updateProduct);
 
 module.exports = route;
