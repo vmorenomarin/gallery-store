@@ -3,8 +3,9 @@ const path = require("path"); // To work with file and directory path.
 // const { pathToFileURL } = require("url"); // URL resolution and parsing
 const { v4: uuidv4 } = require("uuid"); // Random UUID generator
 
+
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, "../storage/imgs"),
+  destination: path.join(__dirname, `../storage/imgs/`),
   filename: (req, file, cb) => {
     cb(null, uuidv4() + path.extname(file.originalname.toLocaleLowerCase()));
   },

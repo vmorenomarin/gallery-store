@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const route = Router();
 const productCtrl = require("../controllers/product.controller");
-upload = require("../middlewares/imgUpload");
+const upload = require("../middlewares/imgUpload");
 
 route.get("/", productCtrl.listProducts);
 route.get("/p/:id", productCtrl.listProductById);
