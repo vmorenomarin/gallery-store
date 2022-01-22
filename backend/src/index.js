@@ -16,6 +16,7 @@ app.use(morgan("dev")); // HTTP request logger
 app.use(cors({ origin: "*" })); // Cross-Origin Resource Sharing. Enable share resources between two domains/servers.
 
 app.use("/product", require("./routes/product.route"));
+app.use("/user", require("./routes/user.route"));
 
 // Run server
 app.listen(app.get("port"), () => {
