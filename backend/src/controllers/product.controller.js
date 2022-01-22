@@ -5,7 +5,9 @@ const { deleteImg } = require("../helpers/deleteImage");
 
 productCtrl.listProducts = async (req, res) => {
   try {
-    const products = await productModel.find();
+    const products = await productModel
+      .find()
+      .populate("user", { password: 0 });
     generalMessage(res, 200, products, true, "Data found.");
   } catch (error) {
     generalMessage(res, 404, "", false, error.message);
@@ -15,8 +17,10 @@ productCtrl.listProducts = async (req, res) => {
 productCtrl.listProductById = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await productModel.findById({ _id: id });
-    if(!product){
+    const product = await productModel
+      .findById({ _id: id })
+      .populate("user", { password: 0 });
+    if (!product) {
       return generalMessage(res, 404, "", false, "Product not found.");
     }
     generalMessage(res, 200, product, true, "Data found.");
@@ -32,6 +36,7 @@ productCtrl.addProduct = async (req, res) => {
       name,
       description,
       price,
+      user,
     });
     const { filename } = req.file;
     newProduct.setImgUrl(filename);
@@ -40,6 +45,18 @@ productCtrl.addProduct = async (req, res) => {
     generalMessage(res, 201, newProduct, true, `Product "${name}" added`);
   } catch (error) {
     generalMessage(res, 400, "", false, error.message);
+  }
+};
+
+productCtrl.productsByUser = async (req, res) => {
+  try {
+    const id = req.userid;
+    const userProducts = await productModel.find(
+      { user: id }.populate("user", { password: 0 })
+    );
+    generalMessage(res, 201, userProducts, true, "User products found.");
+  } catch (error) {
+    generalMessage(res, 500, "", false, error.message);
   }
 };
 

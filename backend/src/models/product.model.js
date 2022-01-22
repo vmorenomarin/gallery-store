@@ -22,11 +22,11 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    // user: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "user",
-    //   required: true,
-    // },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
     rate: {
       type: Number,
       required: false,
