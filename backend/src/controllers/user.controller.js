@@ -1,7 +1,7 @@
 const userCtrl = {};
 const userModel = require("../models/user.model");
 const { generalMessage } = require("../helpers/messages");
-const bcrypt  = require("bcrypt");
+const bcrypt = require("bcrypt");
 const auth = require("../helpers/auth.helper");
 const jsw = require("jsonwebtoken");
 const secret = "Antaeus";
@@ -96,7 +96,7 @@ userCtrl.deleteUser = async (req, res) => {
       return generalMessage(res, 404, "", false, "User ot found.");
     }
     await userModel.deleteOne({ _id: id });
-    generalMessage(res, 200,"",true, "Use were delete.")
+    generalMessage(res, 200, "", true, "Use were delete.");
   } catch (error) {
     generalMessage(res, 500, "", false, error.message);
   }

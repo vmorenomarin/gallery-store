@@ -31,7 +31,7 @@ productCtrl.listProductById = async (req, res) => {
 
 productCtrl.addProduct = async (req, res) => {
   try {
-    const { name, description, price } = req.body;
+    const { name, description, price, user } = req.body;
     const newProduct = new productModel({
       name,
       description,
@@ -41,7 +41,7 @@ productCtrl.addProduct = async (req, res) => {
     const { filename } = req.file;
     newProduct.setImgUrl(filename);
     await newProduct.save();
-    console.log(newProduct);
+    // console.log(newProduct);
     generalMessage(res, 201, newProduct, true, `Product "${name}" added`);
   } catch (error) {
     generalMessage(res, 400, "", false, error.message);
